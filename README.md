@@ -8,8 +8,6 @@ In this repository, a ODE-based defense structure for end-to-end ASR system is i
 
 1, [Adversarial Robustness Toolbox (ART)](https://github.com/Trusted-AI/adversarial-robustness-toolbox) <br>
 
-**Installation:**
-
 ART and its core dependencies can be installed from the PyPI repository using `pip`:<br>
 
 `pip install adversarial-robustness-toolbox`<br>
@@ -18,21 +16,16 @@ ART and its core dependencies can be installed from the PyPI repository using `p
 
 Note: Install [PyTorch](https://github.com/pytorch/pytorch#installation) if you haven't already.
 
-**Installation:**
-
 Please follow the [tutorials](https://github.com/SeanNaren/deepspeech.pytorch) provided in this repo to install step by step.
 
 3, [JiWER](https://github.com/jitsi/jiwer)
-
-**Installation:**
 
 `pip install jiwer`
 
 4, [PyTorch Implementation of Differentiable ODE Solvers](https://github.com/rtqichen/torchdiffeq)
 
-**Installation:**
-
 `pip install torchdiffeq`
+
 
 ## Example
 
