@@ -161,7 +161,7 @@ for n in range(0,num_loop):
     print("The groundtruth is : ", label_index)
     # Load adv audio for IMP and CW Attack
     new_attacked_name = 'adv_'+ str(n)
-    adv_load = np.load(r'/data/home/wentao/adversarial-robustness-toolbox/taotest/Adv_Wav/'+new_attacked_name+'.npy')
+    adv_load = np.load(r'data/Adv_Wav/'+new_attacked_name+'.npy')
     #print('The number of nan of this term is',np.isnan(adv_load[0]).sum())
     # Handle Nan value
     adv_load[0][np.isnan(adv_load[0])]=1e-5
