@@ -1,4 +1,4 @@
-#The WER result after being attacked by three different ASR attacks
+### result after being attacked by three different ASR attacks
 import os, sys
 #import time
 import torch
@@ -6,11 +6,13 @@ import random
 import numpy as np
 import IPython.display as ipd
 import matplotlib.pyplot as plt
+from argparse import ArgumentParser
 from jiwer import wer,cer
 from deepspeech_pytorch.loader.data_loader import load_audio
 from art.estimators.speech_recognition import PyTorchDeepSpeech
 from art.attacks.evasion.imperceptible_asr.imperceptible_asr_pytorch import ImperceptibleASRPyTorch
 from art.attacks.evasion import CarliniWagnerASR
+from art.defences.preprocessor import GaussianAugmentation,LabelSmoothing,Resample
 
 # Parameters initilaization
 wer_max = 0
@@ -18,13 +20,61 @@ at_wer_list=[]
 ao_wer_list=[]
 at_wer_num=0
 ao_wer_num=0
+attack_flag = ''
+defense = ''
+
+parser = ArgumentParser()
+parser.add_argument('--attack', 
+        type = str,
+        default = 'CW_ASR_Attck',
+        help = 'Method of adversarial attack')
+        
+parser.add_argument('--defense',
+        type = str,
+        default = 'Gaussian',
+        help = 'Method of defense')
 
 
-# Set ttack methods path
-data_wav_dire = '/data/RandomAudios'
-data_txt_dire = '/data/RandomTxts'
-adv_wav_dire = '/data/Adv_Wav'
-adv_txt_dire = '/data/Adv_Txt'
+#Defenses Part
+
+DOWNSAMPLED_SAMPLING_RATE=16000
+
+#Prepossing defense1 - Gaussian noise
+gaussian = GaussianAugmentation(sigma = 1.0, augmentation = False, apply_fit = True, apply_predict = False)
+
+#Prepossing defense2 - LabelSmoothing
+smooth = LabelSmoothing(max_value = 0.9, apply_fit = True, apply_predict = False)
+
+#Prepossing defense3 - Resample
+RS = Resample(sr_original=DOWNSAMPLED_SAMPLING_RATE,sr_new=DOWNSAMPLED_SAMPLING_RATE,channels_first = True,apply_fit = True,apply_predict = False)
+
+args = parser.parse_args()
+
+if args.attack == 'IMP_ASR_Attack':
+    attack_flag = '1'
+
+if args.attack == 'CW_ASR_Attack':
+    attack_flag = ''
+
+if args.attack == 'PGD_ASR_Attack':
+    attack_flag = '2'
+
+if args.defense == 'Gaussian':
+    defense_flag = gaussian
+
+if args.defense == 'Smooth':
+    defense_flag = smooth
+
+if args.defense == 'Resample':
+    defense_flag = RS
+
+
+
+# Set attack methods path
+data_wav_dire = '/data/RandomAudios' + attack_flag
+data_txt_dire = '/data/RandomTxts' + attack_flag
+adv_wav_dire = '/data/Adv_Wav' + attack_flag
+adv_txt_dire = '/data/Adv_Txt' + attack_flag
 
 # Sort audio files 
 wav_data_dire = os.listdir(data_wav_dire)
@@ -37,7 +87,6 @@ txt_data_dire.sort(key=lambda x:int(x.split('.')[0]))
 # Get the length of audio files, audio file has the same length as txt file
 wav_list_len = len(wav_data_dire) 
 
-
 # Sort adversarial attack files
 txt_adv_dire = os.listdir(adv_txt_dire)
 txt_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
@@ -45,7 +94,7 @@ wav_adv_dire = os.listdir(adv_wav_dire)
 wav_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
 
 # Create a DeepSpeech estimator
-speech_recognizer = PyTorchDeepSpeech(pretrained_model="tedlium")
+speech_recognizer = PyTorchDeepSpeech(pretrained_model="tedlium",preprocessing_defences=defense_flag)
 
 # Parse the transcript recoginized by DeepSpeech.
 labels_map = dict([(speech_recognizer.model.labels[i], i) for i in range(len(speech_recognizer.model.labels))])
@@ -57,6 +106,8 @@ def parse_transcript(path):
 
 # SNR caculation
 def mySNR(clean,output):
+    length = min(len(clean),len(output))
+    noise = output[:length] - clean[:length]
     length = min(len(clean),len(output))
     noise = output[:length] - clean[:length]
     snr = 10*np.log10((np.sum(clean**2))/(np.sum(noise**2)))
@@ -78,8 +129,10 @@ for n in range(0,num_loop):
     label_index, encoded_label_index = parse_transcript(os.path.join(data_txt_dire,txt_data_dire[n]))
     
     # adversarial audios load for IMP and CW Attack
-    new_attacked_name = 'adv_'+ str(n)
-    adv_load = np.load(r'/data/Adv_Wav/'+new_attacked_name+'.npy')
+    new_attacked_name = 'adv'+ attack_flag + '_' + str(n)
+    adv_load = np.load(adv_wav_dire + '/' + new_attacked_name +'.npy')
+    
+    #(r'/data/Adv_Wav/'+new_attacked_name+'.npy')
     adv_transcription = speech_recognizer.predict(np.array(adv_load), transcription_output=True)
     print("The adversarial samples transcripted by Deepspeech is: ", adv_transcription[0])
     
@@ -121,6 +174,3 @@ print('The average wer value between adv and target is ',np.mean(at_wer_list))
 ao_wer_max=np.max(ao_wer_list)
 print('The max wer value between adv and ori is ',ao_wer_max)
 ao_wer_max_index=np.where(ao_wer_list==ao_wer_max)
-print('The max wer location between adv and ori is ',ao_wer_max_index)
-print('The average wer value between adv and ori is ',np.mean(ao_wer_list))
-
