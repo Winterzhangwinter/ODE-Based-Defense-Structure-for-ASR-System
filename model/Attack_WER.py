@@ -21,17 +21,15 @@ ao_wer_list=[]
 at_wer_num=0
 ao_wer_num=0
 attack_flag = ''
-defense = ''
+defense_flag = 0
 
 parser = ArgumentParser()
 parser.add_argument('--attack', 
         type = str,
-        default = 'CW_ASR_Attck',
+        default = 'IMP_ASR_Attck',
         help = 'Method of adversarial attack')
-        
 parser.add_argument('--defense',
         type = str,
-        default = 'Gaussian',
         help = 'Method of defense')
 
 
@@ -51,30 +49,38 @@ RS = Resample(sr_original=DOWNSAMPLED_SAMPLING_RATE,sr_new=DOWNSAMPLED_SAMPLING_
 args = parser.parse_args()
 
 if args.attack == 'IMP_ASR_Attack':
-    attack_flag = '1'
+    attack_flag = ''
 
 if args.attack == 'CW_ASR_Attack':
-    attack_flag = ''
+    attack_flag = '1'
 
 if args.attack == 'PGD_ASR_Attack':
     attack_flag = '2'
 
 if args.defense == 'Gaussian':
-    defense_flag = gaussian
+    defense_flag = 1
+    defense = gaussian
 
 if args.defense == 'Smooth':
-    defense_flag = smooth
+    defense_flag = 2
+    defense = smooth
 
 if args.defense == 'Resample':
-    defense_flag = RS
+    defense_flag = 3
+    defense = RS
+
 
 
 
 # Set attack methods path
-data_wav_dire = '/data/RandomAudios' + attack_flag
-data_txt_dire = '/data/RandomTxts' + attack_flag
-adv_wav_dire = '/data/Adv_Wav' + attack_flag
-adv_txt_dire = '/data/Adv_Txt' + attack_flag
+data_wav_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/RandomAudios' + attack_flag
+data_txt_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/RandomTxts' + attack_flag
+adv_wav_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/Adv_Wav' + attack_flag
+adv_txt_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/Adv_Txt' + attack_flag
+#data_wav_dire = '/data/RandomAudios'
+#data_txt_dire = '/data/RandomTxts'
+#adv_wav_dire = '/data/Adv_Wav'
+#adv_txt_dire = '/data/Adv_Txt'
 
 # Sort audio files 
 wav_data_dire = os.listdir(data_wav_dire)
@@ -94,7 +100,10 @@ wav_adv_dire = os.listdir(adv_wav_dire)
 wav_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
 
 # Create a DeepSpeech estimator
-speech_recognizer = PyTorchDeepSpeech(pretrained_model="tedlium",preprocessing_defences=defense_flag)
+if defense_flag == 0:
+    speech_recognizer = PyTorchDeepSpeech(pretrained_model="tedlium")
+else:
+    speech_recognizer = PyTorchDeepSpeech(pretrained_model="tedlium",preprocessing_defences=defense)
 
 # Parse the transcript recoginized by DeepSpeech.
 labels_map = dict([(speech_recognizer.model.labels[i], i) for i in range(len(speech_recognizer.model.labels))])
