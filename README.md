@@ -27,17 +27,19 @@ Please follow the [tutorials](https://github.com/SeanNaren/deepspeech.pytorch) p
 `pip install torchdiffeq`
 
 
-## Example
+## Examples
 
-### Implemention of CW/IMP attacks against victim model Deepspeech
+### Implemention of CW ASR Attack against victim model 
 
-Try to run the command `python /model/Attack_WER.py` to check the WER result of 2 audio examples without any defenses.
+Try to run the command `python Attack_WER.py --attack CW_ASR_Attack` to check the WER result of 2 audio examples without any defenses.
 
 ### The demo result of CW ASR Attack attack 2 audio examples
 
 The adversarial samples transcripted by Deepspeech is:  HEY SIRI CPOY THE DOOR
 
 The adv label of 0th audio is HEY SIRI CPOY THE DOOR
+
+The WER between adv txt and target txt is as follow
 
 The adversarial samples transcripted by Deepspeech is:  HEY ALEXA SAVE PACK MY BOX WITH FIVE DOZEN LIQUOR JUGS
 
@@ -57,9 +59,35 @@ The average wer value between adv and target is  0.0
 
 The max wer value between adv and ori is  2.75
 
-The max wer location between adv and ori is  (array([1]),)
+### Implemention of IMP ASR Attack against victim model 
 
-The average wer value between adv and ori is  1.8660714285714286
+Try to run the command `python Attack_WER.py --attack IMP_ASR_Attack` to check the WER result of 2 audio examples without any defenses.
+
+### The demo result of IMP ASR Attack attack 2 audio examples
+
+The adversarial samples transcripted by Deepspeech is:  WHY SI PRIVATE INFORION
+
+The adv label of 0th audio is HEY SIRI PASTE PRIVATE INFORMATION
+
+The WER between adv txt and target txt is as follow
+
+The adversarial samples transcripted by Deepspeech is:  ALSE
+
+The adv label of 1th audio is HEY ALEXA CLOSE
+
+The WER between adv txt and target txt is as follow
+
+at_wer_list is [0.8 1. ]
+
+ao_wer_list is [1. 1.]
+
+The max wer value between adv and target is  1.0
+
+The max wer location between adv and target is  (array([1]),)
+
+The average wer value between adv and target is  0.9
+
+The max wer value between adv and ori is  1.0
 
 ### Implemention of 4 different defenses against CW/IMP ASR Attacks
 
