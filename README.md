@@ -26,6 +26,28 @@ Please follow the [tutorials](https://github.com/SeanNaren/deepspeech.pytorch) p
 
 `pip install torchdiffeq`
 
+## Warm-up 
+
+AO AVERAGE is average WER between defended examples and original audios
+to test how severe the damage is after being attacked. The smaller the value,
+the stronger the defense. The defended example represents the defended attack
+instance, i.e., the original clean speech is first attacked to produce the corresponding
+adversarial sample, and then the corresponding defense method is applied to
+this sample.
+
+AO MAX is max WER between defended examples and original audios. The
+smaller the value, the stronger the defense.
+
+AT MAX is max WER between defended examples and attack targets. Therefore,
+the larger this value is, the further the two are from each other. That is, the less
+similar they are.
+
+AT AVERAGE is average WER between defended examples and attack targets
+to test how far is the distance between the actual attack example crafted by the
+attacker and its set attack target. AT AVERAGE has a similar meaning to AT
+MAX, except that it is expressed as the average distance, i.e., it represents the
+overall effect of all the data under this attack. The larger the value, the stronger
+the defense.
 
 ## Adversarial Examples Generating
 
