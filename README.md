@@ -185,9 +185,9 @@ The max wer value between adv and ori is  2.75
 Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense RS` to check the WER result of 2 audio examples with defenses.
 
 
-## The demo result of ODE-based defense against IMP ASR attack
+## ODE-based Defense against IMP ASR attack
 
-As a comparison, you can run the command `python Defense_WER.py` to check the WER result of 2 audio examples with ODE-Based defense.
+As a comparison, you can run the command `python Defense_WER.py` to check the WER result of 2 audio examples with ODE-Based defense. 
 
 #### If you run the command above correctly, you will get the following results:
 
