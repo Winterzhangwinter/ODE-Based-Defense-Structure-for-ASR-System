@@ -57,46 +57,42 @@ To save running time, only two randomly generated speechs from the open source c
 
 First you can add a custom voice attack method to the corpus, i.e., please try to run the command `python model/Attack_WER.py --attack IMP_ASR_Attack` to check the WER of 2 speechs without any defenses.
 
-#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Attack.txt) to determine if you are running the command correctly.
-
 ### Implemention of [CW ASR Attack](https://arxiv.org/abs/1801.01944) against ASR System DeepSpeech.
 
-Operate like above, try to run the command ` python model/Attack_WER.py --attack CW_ASR_Attack` to check the WER result of 2 audio examples without any defenses. Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Attack.txt) to determine if you are running the command correctly.
+Operate like above, try to run the command ` python model/Attack_WER.py --attack CW_ASR_Attack` to check the WER result of 2 audio examples without any defenses. 
 
+#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Attack.txt) to determine if you are running the commands above correctly.
 
 ## Voice Defenses against Adversarial Examples
 
 On the other hand, you can add commonly used defense methods against the adeversarial examples.
 
-### Implemention of Gaussian Defense against IMP ASR Attacks
+#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the commands below correctly.
+
+### Implemention of Gaussian Defense against IMP ASR Attack
 
 Try to run the command `python model/Attack_WER.py --attack IMP_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses.
 
-#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the command correctly.
-
 ### The Demo Result of Gaussian Defense against CW ASR attack
 
-Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses. Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the command correctly.
+Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses. 
 
-### Implemention of Label Smooth Defense against IMP ASR Attacks
+### Implemention of Label Smooth Defense against IMP ASR Attack
 
 Try to run the command `python Attack_WER.py --attack IMP_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses. 
 
-#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the command correctly.
-
-### The Demo Result of Lable Smooth Defense against CW ASR attack
+### The Demo Result of Lable Smooth Defense against CW ASR Attack
 
 Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses.
 
-### Implemention of Resample Defense against IMP ASR Attacks
+### Implemention of Resample Defense against IMP ASR Attack
 
 Try to run the command `python Attack_WER.py --attack IMP_ASR_Attack --defense RS` to check the WER result of 2 audio examples with defenses.
 
-#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the command correctly.
-
 ### The Demo Result of Resample Defense against CW ASR attack
 
-Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense RS` to check the WER result of 2 audio examples with defenses. Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the command correctly.
+Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense RS` to check the WER result of 2 audio examples with defenses. 
+
 
 ## ODE-based Defense against IMP ASR attack
 
