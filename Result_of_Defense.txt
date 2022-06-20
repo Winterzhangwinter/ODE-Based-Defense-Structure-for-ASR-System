@@ -107,7 +107,7 @@ The average wer value between adv and target is  0.9
 The max wer value between adversarial example and original context is  1.0
 
 Note:
-Please compare the above results with the results in the previous file Result_of_Attack, you can find that the above three defenses do not work,  you can also try different parameters to adjust the peformance of defenses. In any case, the above defense will not be effective.
+Please compare the above results with the results in the previous file (Result_of_Attack)[https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Attack.txt], you can find that the above three defenses do not work,  you can also try different parameters to adjust the peformance of defenses. In any case, the above defense will not be effective.
 
 7, python Defense_WER.py
 
