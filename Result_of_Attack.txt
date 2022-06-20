@@ -36,8 +36,7 @@ The max wer value between adversarial example and original context is  1.0
 
 
 Note:
-The speed of generating the adversarial samples is not shown here, i.e., CW ASR Attack generate the adversarial examples faster than the IMP ASR Attack, however,as you can see, the performance of CW Attack is worse than the IMP's. 
-There is always a trade-off between the performance and generating speed of the adversarial examples.
+The speed of generating the adversarial samples is not shown here, i.e., CW ASR Attack generates the adversarial examples faster than the IMP ASR Attack, however, as you can see, the performance of CW Attack is worse than the IMP's. There is always a trade-off between the performance and generating speed of the adversarial examples.
 
 
 
