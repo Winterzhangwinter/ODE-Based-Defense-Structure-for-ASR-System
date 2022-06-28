@@ -61,13 +61,17 @@ First you can add a custom voice attack method to the corpus, i.e., please try t
 
 Operate like above, try to run the command ` python model/Attack_WER.py --attack CW_ASR_Attack` to check the WER result of 2 audio examples without any defenses. 
 
+### Implemention of [PGD ASR Attack](https://arxiv.org/abs/1906.03333) against ASR System DeepSpeech.
+
+Operate like above, try to run the command ` python model/PGD_Attack_WER.py --attack PGD_ASR_Attack` to check the WER result of 2 audio examples without any defenses. 
+
 #### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Attack.txt) to determine if you are running the commands above correctly.
 
 ## Voice Defenses against Adversarial Examples
 
 On the other hand, you can add commonly used defense methods against the adeversarial examples.
 
-#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) to determine if you are running the commands below correctly.
+#### Please refer to the results in the [txt file](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) for IMP/C&W Attack and to determine if you are running the commands below correctly.
 
 ### Implemention of Gaussian Defense against IMP ASR Attack
 
