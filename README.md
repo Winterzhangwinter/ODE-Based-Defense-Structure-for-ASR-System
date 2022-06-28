@@ -65,13 +65,13 @@ Operate like above, try to run the command ` python model/Attack_WER.py --attack
 
 Operate like above, try to run the command ` python model/PGD_Attack_WER.py --attack PGD_ASR_Attack` to check the WER result of 2 audio examples without any defenses. 
 
-#### Please refer to the results in the [Result_of_Defense](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) for IMP/C&W Attack and the [Result_PGD_Attack](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_PGD_Attack.txt) for PGD Attack to determine if you are running the commands below correctly.
+#### Please refer to the results in the [Result_of_Attack](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Attack.txt) for IMP/C&W Attacks and the [Result_PGD_Attack](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_PGD_Attack.txt) for the PGD Attack to determine if you are running the commands below correctly.
 
 ## Voice Defenses against Adversarial Examples
 
 On the other hand, you can add commonly used defense methods against the adeversarial examples.
 
-#### Please refer to the results in the [Result_of_Defense](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) for IMP/C&W Attack and the [Result_PGD_Attack](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_PGD_Attack.txt) for PGD Attack to determine if you are running the commands below correctly.
+#### Please refer to the results in the [Result_of_Defense](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_of_Defense.txt) for defenses against IMP/C&W Attacks and the [Result_PGD_Attack](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_PGD_Attack.txt) for defense against the PGD Attack to determine if you are running the commands below correctly.
 
 ### Implemention of Gaussian Defense against IMP ASR Attack
 
@@ -79,28 +79,39 @@ Try to run the command `python model/Attack_WER.py --attack IMP_ASR_Attack --def
 
 ### The Demo Result of Gaussian Defense against CW ASR attack
 
-Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses. 
+Try to run the command `python model/Attack_WER.py --attack CW_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses. 
+
+### The Demo Result of Gaussian Defense against PGD ASR attack
+
+Try to run the command `python model/PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses. 
 
 ### Implemention of Label Smooth Defense against IMP ASR Attack
 
-Try to run the command `python Attack_WER.py --attack IMP_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses. 
+Try to run the command `python model/Attack_WER.py --attack IMP_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses. 
 
 ### The Demo Result of Lable Smooth Defense against CW ASR Attack
 
-Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses.
+Try to run the command `python model/Attack_WER.py --attack CW_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses.
+
+### The Demo Result of Lable Smooth Defense against PGD ASR attack
+
+Try to run the command `python model/PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses. 
 
 ### Implemention of Resample Defense against IMP ASR Attack
 
-Try to run the command `python Attack_WER.py --attack IMP_ASR_Attack --defense RS` to check the WER result of 2 audio examples with defenses.
+Try to run the command `python model/Attack_WER.py --attack IMP_ASR_Attack --defense Resample` to check the WER result of 2 audio examples with defenses.
 
 ### The Demo Result of Resample Defense against CW ASR attack
 
-Try to run the command `python Attack_WER.py --attack CW_ASR_Attack --defense RS` to check the WER result of 2 audio examples with defenses. 
+Try to run the command `python model/Attack_WER.py --attack CW_ASR_Attack --defense Resample` to check the WER result of 2 audio examples with defenses. 
 
+### The Demo Result of Resample Defense against PGD ASR attack
+
+Try to run the command `python model/PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Resample` to check the WER result of 2 audio examples with defenses. 
 
 ## ODE-based Defense against IMP ASR attack
 
-As a comparison, you can run the command `python Defense_WER.py` to check the WER result of 2 audio examples with ODE-Based defense. 
+As a comparison, you can run the command `python model/Defense_WER.py` to check the WER result of 2 audio examples with ODE-Based defense. 
 
 #### If you run the command above correctly, you will get the following results:
 
@@ -135,3 +146,10 @@ After adding Defenses,the max wer value between adv and ori is  1.0
 After adding Defenses,the max wer location between adv and ori is  (array([1]),)
 
 After adding Defenses,the average wer value between adv and ori is  0.8571428571428572
+
+## ODE-based Defense against PGD ASR attack
+
+As a comparison, you can run the command `python model/PGD_ODE.py` to check the WER result of 2 audio examples with ODE-Based defense.
+
+#### Please refer to the results in the [Result_PGD_ODE](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_PGD_ODE.txt) for defense against the PGD Attack to determine if you are running the commands correctly.
+
