@@ -1,6 +1,4 @@
-#[1e-3*npout[0]+1e-4*npout[1]] for IMP,[1e-3*npout[0]+1e-6*npout[1]] for PGD
-
-1, python Defense_WER.py
+1, python PGD_ODE.py
 The groundtruth is :  IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
 
 Without any defenses, the adversarial samples transcripted by deepspeech:  IN THE HUMALAYAS THA THIRD LARGETH  MATS ERVISE AF THE TOGH YOUE SE MI LEG WOUD COULD FE RE TO GO THGWER OT DI PERSEN OF ALL THE PEOPLE IN THE WORLD GETHALE H THEY 'RE GROING TO  MOER FROM MTNMELTING WUOE ENDTH ENTING THIS GREEA E TORDS  DREEKING ATERFU THIS CITY
@@ -25,4 +23,3 @@ After adding Defenses,the average wer value between adv and target is  6.5
 After adding Defenses,the max wer value between adv and ori is  5.0
 After adding Defenses,the max wer location between adv and ori is  (array([1]),)
 After adding Defenses,the average wer value between adv and ori is  2.875
-
