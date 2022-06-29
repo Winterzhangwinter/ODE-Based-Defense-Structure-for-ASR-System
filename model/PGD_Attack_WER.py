@@ -1,6 +1,5 @@
-### result after being attacked by three different ASR attacks
+### result after being attacked by PGD ASR attack.
 import os, sys
-#import time
 import torch
 import random
 import numpy as np
@@ -15,12 +14,12 @@ from art.attacks.evasion import CarliniWagnerASR
 from art.defences.preprocessor import GaussianAugmentation,LabelSmoothing,Resample
 
 # Parameters initilaization
-wer_max = 0
-at_wer_list=[]
-ao_wer_list=[]
-at_wer_num=0
-ao_wer_num=0
-attack_flag = ''
+wer_max      = 0
+at_wer_list  = []
+ao_wer_list  = []
+at_wer_num   = 0
+ao_wer_num   = 0
+attack_flag  = ''
 defense_flag = 0
 
 parser = ArgumentParser()
@@ -34,15 +33,11 @@ parser.add_argument('--defense',
 
 
 #Defenses Part
-
 DOWNSAMPLED_SAMPLING_RATE=16000
-
 #Prepossing defense1 - Gaussian noise
 gaussian = GaussianAugmentation(sigma = 1.0, augmentation = False, apply_fit = True, apply_predict = False)
-
 #Prepossing defense2 - LabelSmoothing
 smooth = LabelSmoothing(max_value = 0.9, apply_fit = True, apply_predict = False)
-
 #Prepossing defense3 - Resample
 RS = Resample(sr_original=DOWNSAMPLED_SAMPLING_RATE,sr_new=DOWNSAMPLED_SAMPLING_RATE,channels_first = True,apply_fit = True,apply_predict = False)
 
@@ -68,9 +63,6 @@ if args.defense == 'Smooth':
 if args.defense == 'Resample':
     defense_flag = 3
     defense = RS
-
-
-
 
 # Set attack methods path
 data_wav_dire = '/data/RandomAudios' + attack_flag
@@ -129,40 +121,25 @@ def myWER(Groundtrue_txt, Predicted_txt):
 # Main function
 num_loop=2 #wav_list_len
 for n in range(0,num_loop):
-    
     # clean txt load
     label_index, encoded_label_index = parse_transcript(os.path.join(data_txt_dire,txt_data_dire[n]))
-    print("Without any voice attacks, the {no}-th transcription is {no_label}".format(no = n, no_label = label_index))
-    
-    # adversarial audios load for IMP and CW Attack
-    #new_attacked_name = 'adv'+ attack_flag + '_' + str(n)
-    #adv_load = np.load(adv_wav_dire + '/' + new_attacked_name +'.npy')
-    
-    #(r'/data/Adv_Wav/'+new_attacked_name+'.npy')
-    #adv_transcription = speech_recognizer.predict(np.array(adv_load), transcription_output=True)
-    #print("The {na}-th adversarial sample transcripted by Deepspeech is: {na_label}".format(na = n, na_label =  adv_transcription[0])
-    
-    # PGD Attack
+    print("Without any voice attacks, the {no}-th transcription is {no_label}".format(no = n, no_label = label_index)
+    # PGD Attack load
     wav_index = load_audio(os.path.join(adv_wav_dire, wav_adv_dire[n]))
     adv_transcription = speech_recognizer.predict(np.array([wav_index]), transcription_output=True)
     print("Under PGD Attack, the adversarial transcription is : ", adv_transcription[0])
-
     # adv txt load
     adv_label_index, adv_encoded_label_index = parse_transcript(os.path.join(adv_txt_dire, txt_adv_dire[n]))
     print('The current adversarial attack is {adv_method}, the {nt}-th target is {nt_label}'.format(adv_method = args.attack, nt = n, nt_label = adv_label_index))
-    #print('The WER between adv txt and target txt is as follow ')
-    #myWER(adv_label_index, adv_transcription[0])
-    
     if (defense_flag == 0):
-        #adv_transcription = speech_recognizer.predict(np.array(adv_load), transcription_output=True)
-        adv_transcription = speech_recognizer.predict(np.array([wav_index]), transcription_output=True)
+        adv_transcription = speech_recognizer.predict(np.array([wav_index]), transcription_output=False)
         print("After adding the attack PGD Attack, the {na}-th adversarial sample transcripted by Deepspeech is: {na_label} ".format(na = n, na_label =  adv_transcription[0]))
     else:
         de_adv_transcription = speech_recognizer.predict(np.array([wav_index]), transcription_output=True)
         print("After adding the defense {defense_method} ,the {na}-th adversarial sample transcripted by Deepspeech is: {na_label} \n".format(defense_method = args.defense, na = n, na_label =  de_adv_transcription[0]))
         adv_transcription = de_adv_transcription
     
-    #SNR only subject to single sentence
+    #SNR subjects to the single sentence
     #print('The {ni}-th SNR as follow: '.format(ni=n))
     #mySNR(np.array(wav_index),np.array(adv_load))
     
