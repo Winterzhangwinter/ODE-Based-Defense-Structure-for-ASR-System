@@ -72,15 +72,11 @@ if args.defense == 'Resample':
 
 
 
-# Set attack methods path
-data_wav_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/RandomAudios' + attack_flag
-data_txt_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/RandomTxts' + attack_flag
-adv_wav_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/Adv_Wav' + attack_flag
-adv_txt_dire = '/data/home/wentao/adversarial-robustness-toolbox/taotest/Adv_Txt' + attack_flag
-#data_wav_dire = '/data/RandomAudios'
-#data_txt_dire = '/data/RandomTxts'
-#adv_wav_dire = '/data/Adv_Wav'
-#adv_txt_dire = '/data/Adv_Txt'
+# Set attack methods path, you can set your path to data and txt files as below.
+data_wav_dire = '/data/RandomAudios'  + attack_flag
+data_txt_dire = '/data/RandomTxts'  + attack_flag
+adv_wav_dire = '/data/Adv_Wav'  + attack_flag
+adv_txt_dire = '/data/Adv_Txt'  + attack_flag
 
 # Sort audio files 
 wav_data_dire = os.listdir(data_wav_dire)
@@ -132,6 +128,7 @@ def myWER(Groundtrue_txt, Predicted_txt):
 
 # Main function
 num_loop=2 #wav_list_len
+
 for n in range(0,num_loop):
     
     # clean txt load
@@ -156,7 +153,6 @@ for n in range(0,num_loop):
     print('The WER between adv txt and target txt is as follow ')
     myWER(adv_label_index, adv_transcription[0])
     
-
     #SNR only subject to single sentence
     #print('The {ni}-th SNR as follow: '.format(ni=n))
     #mySNR(np.array(wav_index),np.array(adv_load))
