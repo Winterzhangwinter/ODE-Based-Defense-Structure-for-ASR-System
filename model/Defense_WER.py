@@ -1,4 +1,4 @@
-# The WER result after being attacked by three different ASR attacks
+# The WER results after being attacked by three different ASR attacks
 import os, sys
 import time
 import torch
@@ -15,6 +15,7 @@ from art.defences.preprocessor import  Mp3Compression,GaussianAugmentation,Label
 import torch.nn as nn
 from torchdiffeq import odeint_adjoint as odeint
 
+
 # Parameters initilaization
 wer_max = 0
 at_wer_list=[]
@@ -22,7 +23,7 @@ ao_wer_list=[]
 at_wer_num=0
 ao_wer_num=0
 
-# Set attack path 
+# Set attack path, e.g., IMP ASR Attack
 data_wav_dire = '/data/RandomAudios'
 data_txt_dire = '/data/RandomTxts'
 adv_wav_dire = '/data/Adv_Wav'
@@ -44,25 +45,12 @@ txt_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
 wav_adv_dire = os.listdir(adv_wav_dire)
 wav_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
 
-
-# Some defenses 
-
-#Prepossing defense1 - Gaussian noise
-#gaussian = GaussianAugmentation(sigma = 1, augmentation = False, apply_fit = True, apply_predict = False)
-
-#Prepossing defense2 - LabelSmoothing
-#smooth = LabelSmoothing(max_value = 0.9, apply_fit = True, apply_predict = False)
-
-#Preprossing defense3 - Resampling
-#RS = Resample(sr_original=DOWNSAMPLED_SAMPLING_RATE, sr_new=8000, channels_first = False, apply_fit = True, apply_predict = False)
-
-
 # ODE parameter initialization
-T = 1 # the endtime of processing. 
+T          = 1              # the endtime of processing. 
 non_linear = torch.sin
-coeffi = -1    #-1 by default
-layernum = 0     #0  by default
-tol = 1e-3      #1e-3 by default
+coeffi     = -1             # -1 by default
+layernum   = 0              # 0  by default
+tol        = 1e-3           # 1e-3 by default
 
 # Define ODE Bolck Part
 class Fully_Connect(nn.Module):
@@ -91,7 +79,6 @@ class ODE_Function(nn.Module):
         out = self.non2(out)
         out = coeffi*self.fc3(t, out)
         out = self.non3(out)
-
         return out
 
 class ODEBlock(nn.Module):
@@ -153,34 +140,27 @@ def NpDatainfo(np_wav_index):
 
 # main function
 num_loop = 2 # wav_list_len can be set randomly.
-
 for n in range(0,num_loop):
-    #speech_recognizer_defense = PyTorchDeepSpeech(pretrained_model="tedlium",preprocessing_defences=None)
     # Load clean txt files 
     label_index, encoded_label_index = parse_transcript(os.path.join(data_txt_dire,txt_data_dire[n]))
     print("The groundtruth is : ", label_index)
-    # Load adv audio for IMP and CW Attack
+    # Load adv audio for IMP Attack
     new_attacked_name = 'adv_'+ str(n)
     adv_load = np.load(r'data/Adv_Wav/'+new_attacked_name+'.npy')
-    #print('The number of nan of this term is',np.isnan(adv_load[0]).sum())
     # Handle Nan value
     adv_load[0][np.isnan(adv_load[0])]=1e-5
     # Transcript the adversial samples
     attack_adv_transcription = speech_recognizer.predict(np.array(adv_load), transcription_output=True)
     print("Without any defense, the adversarial samples transcripted by deepspeech: ", attack_adv_transcription[0])
-    # Load adv audio for PGD Attack
-    #wav_index = load_audio(os.path.join(adv_wav_dire,wav_adv_dire[n]))
     # Load adversarial txt files.
     adv_label_index, adv_encoded_label_index = parse_transcript(os.path.join(adv_txt_dire,txt_adv_dire[n]))
     print('The adv target of {ni}th audio should to be {label}'.format(ni=n,label=adv_label_index))
-    #ODE defense part
+    #ODE defense
     odefunc = ODE_Function((adv_load[0]).size)
     feature_layers = ODEBlock(odefunc)
     output = feature_layers(torch.from_numpy(adv_load[0]))
     npout  = output.detach().numpy()
-    #NpDatainfo(npout)
     newout =[1e-3*npout[0]+1e-4*npout[1]]
-    #NpDatainfo(np.array(newout))
     adv_transcription = speech_recognizer.predict(np.array(newout), transcription_output=True)
     print("After adding the ODE defense block, the transcription turns to be: ", adv_transcription[0])
 
