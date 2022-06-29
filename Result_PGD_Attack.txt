@@ -1,24 +1,4 @@
-1, python PGD_Attack_WER.py --attack PGD_ASR_Attack
-
-Without any voice attacks, the 0-th transcription is IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
-Under PGD Attack, the adversarial transcription is :  IN THE HUMALAYAS THA THIRD LARGETH  MATS ERVISE AF THE TOGH YOUE SE MI LEG WOUD COULD FE RE TO GO THGWER OT DI PERSEN OF ALL THE PEOPLE IN THE WORLD GETHALE H THEY 'RE GROING TO  MOER FROM MTNMELTING WUOE ENDTH ENTING THIS GREEA E TORDS  DREEKING ATERFU THIS CITY
-The current adversarial attack is PGD_ASR_Attack, the 0-th target is HEY SIRI CPOY COMMAND TURN LEFT
-After adding the attack PGD Attack, the 0-th adversarial sample transcripted by Deepspeech is: IN THE HUMALAYAS THA THIRD LARGETH  MATS ERVISE AF THE TOGH YOUE SE MI LEG WOUD COULD FE RE TO GO THGWER OT DI PERSEN OF ALL THE PEOPLE IN THE WORLD GETHALE H THEY 'RE GROING TO  MOER FROM MTNMELTING WUOE ENDTH ENTING THIS GREEA E TORDS  DREEKING ATERFU THIS CITY
-
-Without any voice attacks, the 1-th transcription is WHAT THIS IS DOING
-Under PGD Attack, the adversarial transcription is :  WERE THE A TA A A O E A AE E E O E A   TO TOR   E O EE EA A
-The current adversarial attack is PGD_ASR_Attack, the 1-th target is HEY GOOGLE SAVE THE DOOR
-After adding the attack PGD Attack, the 1-th adversarial sample transcripted by Deepspeech is: WERE THE A TA A A O E A AE E E O E A   TO TOR   E O EE EA A
-
-After 2 epochs, the final result shows as follows
-at_wer_list is [8.66666667 4.4       ]
-ao_wer_list is [0.76785714 5.5       ]
-The max wer value between adversarial example and adversarial target is  8.666666666666666
-The max wer location between adv and target is  (array([0]),)
-The average wer value between adv and target is  6.533333333333333
-The max wer value between adversarial example and original context is  5.5
-
-2, python PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Gaussian
+1, python PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Gaussian
 
 Without any voice attacks, the 0-th transcription is IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
 Under PGD Attack, the adversarial transcription is :  IN THE HUMALAYAS THA THIRD LARGETH  MATS ERVISE AF THE TOGH YOUE SE MI LEG WOUD COULD FE RE TO GO THGWER OT DI PERSEN OF ALL THE PEOPLE IN THE WORLD GETHALE H THEY 'RE GROING TO  MOER FROM MTNMELTING WUOE ENDTH ENTING THIS GREEA E TORDS  DREEKING ATERFU THIS CITY
@@ -38,7 +18,7 @@ The max wer location between adv and target is  (array([0]),)
 The average wer value between adv and target is  6.533333333333333
 The max wer value between adversarial example and original context is  5.5
 
-3, python PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Smooth
+2, python PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Smooth
 
 Without any voice attacks, the 0-th transcription is IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
 Under PGD Attack, the adversarial transcription is :  IN THE HUMALAYAS THA THIRD LARGETH  MATS ERVISE AF THE TOGH YOUE SE MI LEG WOUD COULD FE RE TO GO THGWER OT DI PERSEN OF ALL THE PEOPLE IN THE WORLD GETHALE H THEY 'RE GROING TO  MOER FROM MTNMELTING WUOE ENDTH ENTING THIS GREEA E TORDS  DREEKING ATERFU THIS CITY
@@ -58,7 +38,7 @@ The max wer location between adv and target is  (array([0]),)
 The average wer value between adv and target is  6.533333333333333
 The max wer value between adversarial example and original context is  5.5
 
-4, python PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Resample
+3, python PGD_Attack_WER.py --attack PGD_ASR_Attack --defense Resample
 
 Without any voice attacks, the 0-th transcription is IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
 Under PGD Attack, the adversarial transcription is :  IN THE HUMALAYAS THA THIRD LARGETH  MATS ERVISE AF THE TOGH YOUE SE MI LEG WOUD COULD FE RE TO GO THGWER OT DI PERSEN OF ALL THE PEOPLE IN THE WORLD GETHALE H THEY 'RE GROING TO  MOER FROM MTNMELTING WUOE ENDTH ENTING THIS GREEA E TORDS  DREEKING ATERFU THIS CITY
