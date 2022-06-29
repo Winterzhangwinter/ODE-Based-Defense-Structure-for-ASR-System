@@ -34,7 +34,7 @@ The max wer location between adv and target is  (array([0, 1]),)
 The average wer value between adv and target is  0.0
 The max wer value between adversarial example and original context is  2.75
 
-3, python Attack_WER.py --attack IMP_ASR_Attack --defense RS
+3, python Attack_WER.py --attack IMP_ASR_Attack --defense Resample
 
 Without any voice attacks, the 0-th transcription is IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
 The current adversarial attack is IMP_ASR_Attack, the 0-th target is HEY SIRI CPOY THE DOOR
@@ -52,64 +52,7 @@ The max wer location between adv and target is  (array([0, 1]),)
 The average wer value between adv and target is  0.0
 The max wer value between adversarial example and original context is  2.75
 
-4, python Attack_WER.py --attack CW_ASR_Attack --defense Gaussian
-
-Without any voice attacks, the 0-th transcription is LOOK CAREFULLY AT THE AREA OF THE EASTERN PACIFIC FROM THE AMERICAS EXTENDING WESTWARD AND ON EITHER SIDE OF THE INDIAN SUBCONTINENT WHERE THERE IS A RADICAL DEPLETION OF OXYGEN IN THE OCEANS
-The current adversarial attack is CW_ASR_Attack, the 0-th target is HEY SIRI PASTE PRIVATE INFORMATION
-After adding the defense Gaussian ,the 0-th adversarial sample transcripted by Deepspeech is: WHY SI PRIVATE INFORION
-
-Without any voice attacks, the 1-th transcription is AROUND CHRISTMAS IN MY HOME IN TENNESSEE A BILLION GALLONS OF COAL SLUDGE WAS SPILLED YOU PROBABLY SAW IT ON THE NEWS THIS ALL OVER THE COUNTRY IS THE SECOND LARGEST WASTE STREAM IN AMERICA THIS HAPPENED AROUND CHRISTMAS ONE OF THE COAL INDUSTRY 'S ADS AROUND CHRISTMAS WAS THIS ONE
-The current adversarial attack is CW_ASR_Attack, the 1-th target is HEY ALEXA CLOSE
-After adding the defense Gaussian ,the 1-th adversarial sample transcripted by Deepspeech is: ALSE
-
-After 2 epochs, the final result shows as follows
-at_wer_list is [0.8 1. ]
-ao_wer_list is [1. 1.]
-The max wer value between adversarial example and adversarial target is  1.0
-The max wer location between adv and target is  (array([1]),)
-The average wer value between adv and target is  0.9
-The max wer value between adversarial example and original context is  1.0
-
-5, python Attack_WER.py --attack CW_ASR_Attack --defense Smooth
-
-Without any voice attacks, the 0-th transcription is LOOK CAREFULLY AT THE AREA OF THE EASTERN PACIFIC FROM THE AMERICAS EXTENDING WESTWARD AND ON EITHER SIDE OF THE INDIAN SUBCONTINENT WHERE THERE IS A RADICAL DEPLETION OF OXYGEN IN THE OCEANS
-The current adversarial attack is CW_ASR_Attack, the 0-th target is HEY SIRI PASTE PRIVATE INFORMATION
-After adding the defense Smooth ,the 0-th adversarial sample transcripted by Deepspeech is: WHY SI PRIVATE INFORION
-
-Without any voice attacks, the 1-th transcription is AROUND CHRISTMAS IN MY HOME IN TENNESSEE A BILLION GALLONS OF COAL SLUDGE WAS SPILLED YOU PROBABLY SAW IT ON THE NEWS THIS ALL OVER THE COUNTRY IS THE SECOND LARGEST WASTE STREAM IN AMERICA THIS HAPPENED AROUND CHRISTMAS ONE OF THE COAL INDUSTRY 'S ADS AROUND CHRISTMAS WAS THIS ONE
-The current adversarial attack is CW_ASR_Attack, the 1-th target is HEY ALEXA CLOSE
-After adding the defense Smooth ,the 1-th adversarial sample transcripted by Deepspeech is: ALSE
-
-After 2 epochs, the final result shows as follows
-at_wer_list is [0.8 1. ]
-ao_wer_list is [1. 1.]
-The max wer value between adversarial example and adversarial target is  1.0
-The max wer location between adv and target is  (array([1]),)
-The average wer value between adv and target is  0.9
-The max wer value between adversarial example and original context is  1.0
-
-6, python Attack_WER.py --attack CW_ASR_Attack --defense RS
-
-Without any voice attacks, the 0-th transcription is LOOK CAREFULLY AT THE AREA OF THE EASTERN PACIFIC FROM THE AMERICAS EXTENDING WESTWARD AND ON EITHER SIDE OF THE INDIAN SUBCONTINENT WHERE THERE IS A RADICAL DEPLETION OF OXYGEN IN THE OCEANS
-The current adversarial attack is CW_ASR_Attack, the 0-th target is HEY SIRI PASTE PRIVATE INFORMATION
-After adding the attack CW_ASR_Attack, the 0-th adversarial sample transcripted by Deepspeech is: WHY SI PRIVATE INFORION
-
-Without any voice attacks, the 1-th transcription is AROUND CHRISTMAS IN MY HOME IN TENNESSEE A BILLION GALLONS OF COAL SLUDGE WAS SPILLED YOU PROBABLY SAW IT ON THE NEWS THIS ALL OVER THE COUNTRY IS THE SECOND LARGEST WASTE STREAM IN AMERICA THIS HAPPENED AROUND CHRISTMAS ONE OF THE COAL INDUSTRY 'S ADS AROUND CHRISTMAS WAS THIS ONE
-The current adversarial attack is CW_ASR_Attack, the 1-th target is HEY ALEXA CLOSE
-After adding the attack CW_ASR_Attack, the 1-th adversarial sample transcripted by Deepspeech is: ALSE
-
-After 2 epochs, the final result shows as follows
-at_wer_list is [0.8 1. ]
-ao_wer_list is [1. 1.]
-The max wer value between adversarial example and adversarial target is  1.0
-The max wer location between adv and target is  (array([1]),)
-The average wer value between adv and target is  0.9
-The max wer value between adversarial example and original context is  1.0
-
-Note:
-Please compare the above results with the results in the previous file Result_of_Attack, you can find that the above three defenses do not work, you can also try different parameters to adjust the peformance of defenses. In any case, the above defense will not be effective.
-
-7, python Defense_WER.py
+3, python Defense_WER.py
 
 The groundtruth is :  IN THE HIMALAYAS THE THIRD LARGEST MASS OF ICE AT THE TOP YOU SEE NEW LAKES WHICH A FEW YEARS AGO WERE GLACIERS FORTY PERCENT OF ALL THE PEOPLE IN THE WORLD GET HALF OF THEIR DRINKING WATER FROM THAT MELTING FLOW IN THE ANDES THIS GLACIER IS THE SOURCE OF DRINKING WATER FOR THIS CITY
 Without any defenses, the adversarial samples transcripted by deepspeech:  HEY SIRI CPOY THE DOOR
