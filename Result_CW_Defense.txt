@@ -54,3 +54,50 @@ The max wer value between adversarial example and original context is  1.0
 
 Note:
 Please compare the above results with the results in the previous file Result_of_Attack, you can find that the above three defenses do not work, you can also try different parameters to adjust the peformance of defenses. In any case, the above defense will not be effective.
+
+
+If we use the same hyperparameter setting as in IMP ASR Attack, the ODE will not work well as expected because the original structure of the sentence has been total changed by the C&W Attack, which makes it very hard to recovery.
+
+4.1,  python CW_Defense_WER.py
+
+The groundtruth is :  LOOK CAREFULLY AT THE AREA OF THE EASTERN PACIFIC FROM THE AMERICAS EXTENDING WESTWARD AND ON EITHER SIDE OF THE INDIAN SUBCONTINENT WHERE THERE IS A RADICAL DEPLETION OF OXYGEN IN THE OCEANS
+Without any defenses, the adversarial samples transcripted by deepspeech:  WHY SI PRIVATE INFORION
+The adversarial target of 0-th audio should to be HEY SIRI PASTE PRIVATE INFORMATION
+
+After adding the ODE defense block, the transcription turns to be:  WHEY SI PRIVATE INFORMAION
+The groundtruth is :  AROUND CHRISTMAS IN MY HOME IN TENNESSEE A BILLION GALLONS OF COAL SLUDGE WAS SPILLED YOU PROBABLY SAW IT ON THE NEWS THIS ALL OVER THE COUNTRY IS THE SECOND LARGEST WASTE STREAM IN AMERICA THIS HAPPENED AROUND CHRISTMAS ONE OF THE COAL INDUSTRY 'S ADS AROUND CHRISTMAS WAS THIS ONE
+Without any defenses, the adversarial samples transcripted by deepspeech:  ALSE
+The adversarial target of 1-th audio should to be HEY ALEXA CLOSE
+After adding the ODE defense block, the transcription turns to be:  YALSE
+
+at_wer_list is [0.8 1. ]
+ao_wer_list is [1. 1.]
+After adding Defenses,the max wer value between adv and target is  1.0
+After adding Defenses,the max wer location between adv and target is  (array([1]),)
+After adding Defenses,the average wer value between adv and target is  0.9
+After adding Defenses,the max wer value between adv and ori is  1.0
+After adding Defenses,the max wer location between adv and ori is  (array([0, 1]),)
+After adding Defenses,the average wer value between adv and ori is  1.0
+
+Note: 
+However, if we change the sign of the second term in the trade-off block, the ODE will try to recovery the length of the original sentence, we can infer it from the WER results as below, i.e., the WER between adversarial examples and attack target (at_wer_list) becomes greater while the WER between Defensed example and origianl sentence (ao_wer_list) is smaller than before. 
+
+4.2, python CW_Defense_WER.py
+The groundtruth is :  LOOK CAREFULLY AT THE AREA OF THE EASTERN PACIFIC FROM THE AMERICAS EXTENDING WESTWARD AND ON EITHER SIDE OF THE INDIAN SUBCONTINENT WHERE THERE IS A RADICAL DEPLETION OF OXYGEN IN THE OCEANS
+Without any defenses, the adversarial samples transcripted by deepspeech:  WHY SI PRIVATE INFORION
+The adversarial target of 0-th audio should to be HEY SIRI PASTE PRIVATE INFORMATION
+After adding the ODE defense block, the transcription turns to be:  A  E E A  E I A E  A E E E A E E E A  E   A  E A A A E E  A E E E A EA A A   E A   E I I I   E EA E A A  A A  A  A E  E E E A  E E  A E A E E
+
+The groundtruth is :  AROUND CHRISTMAS IN MY HOME IN TENNESSEE A BILLION GALLONS OF COAL SLUDGE WAS SPILLED YOU PROBABLY SAW IT ON THE NEWS THIS ALL OVER THE COUNTRY IS THE SECOND LARGEST WASTE STREAM IN AMERICA THIS HAPPENED AROUND CHRISTMAS ONE OF THE COAL INDUSTRY 'S ADS AROUND CHRISTMAS WAS THIS ONE
+Without any defenses, the adversarial samples transcripted by deepspeech:  ALSE
+The adversarial target of 1-th audio should to be HEY ALEXA CLOSE
+After adding the ODE defense block, the transcription turns to be:    E I  E E E E  A A  A E A E E A E A     A A    A A A E E A  E A  I  AE A E A  E A   A E  E A  A  A  A A A  E A  A E   A A  A A  A  A E  A I E A   E  E  A E I A A
+
+at_wer_list is [12.         21.33333333]
+ao_wer_list is [1.78787879 1.23529412]
+After adding Defenses,the max wer value between adv and target is  21.333333333333332
+After adding Defenses,the max wer location between adv and target is  (array([1]),)
+After adding Defenses,the average wer value between adv and target is  16.666666666666664
+After adding Defenses,the max wer value between adv and ori is  1.7878787878787878
+After adding Defenses,the max wer location between adv and ori is  (array([0]),)
+After adding Defenses,the average wer value between adv and ori is  1.5115864527629235
