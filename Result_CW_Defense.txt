@@ -53,10 +53,10 @@ The average wer value between adv and target is  0.9
 The max wer value between adversarial example and original context is  1.0
 
 Note:
-Please compare the above results with the results in the previous file Result_of_Attack, you can find that the above three defenses do not work, you can also try different parameters to adjust the peformance of defenses. In any case, the above defense will not be effective.
+Please compare the above results with the results in the previous file Result_of_Attacks, you can find that the above three defenses do not work, you can also try different parameters to adjust the peformance of defenses. In any case, the above defense will not be effective.
 
 
-If we use the same hyperparameter setting as in IMP ASR Attack, the ODE will not work well as expected because the original structure of the sentence has been total changed by the C&W Attack, which makes it very hard to recovery.
+As for ODE part, if we use the same hyperparameter setting as in IMP ASR Attack, the ODE will not work well as expected because the original structure of the sentence has been total changed by the C&W Attack, which makes it very hard to recovery.
 
 4.1,  python CW_Defense_WER.py
 
@@ -79,7 +79,7 @@ After adding Defenses,the max wer value between adv and ori is  1.0
 After adding Defenses,the max wer location between adv and ori is  (array([0, 1]),)
 After adding Defenses,the average wer value between adv and ori is  1.0
 
-Note: 
+
 However, if we change the sign of the second term in the trade-off block, the ODE will try to recovery the length of the original sentence, we can infer it from the WER results as below, i.e., the WER between adversarial examples and attack target (at_wer_list) becomes greater while the WER between Defensed example and origianl sentence (ao_wer_list) is smaller than before. 
 
 4.2, python CW_Defense_WER.py
