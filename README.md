@@ -91,17 +91,21 @@ Try to run the command `python model/Defense_WER.py` to check the WER result of 
 
 ## Voice Defenses against C&W ASR Attack.
 
-### The Demo Result of Gaussian Defense against CW ASR attack
+### The Demo Result of Gaussian Defense against C&W ASR attack
 
 Try to run the command `python model/Attack_WER.py --attack CW_ASR_Attack --defense Gaussian` to check the WER result of 2 audio examples with defenses. 
 
-### The Demo Result of Lable Smooth Defense against CW ASR Attack
+### The Demo Result of Lable Smooth Defense against C&W ASR Attack
 
 Try to run the command `python model/Attack_WER.py --attack CW_ASR_Attack --defense Smooth` to check the WER result of 2 audio examples with defenses.
 
-### The Demo Result of Resample Defense against CW ASR attack
+### The Demo Result of Resample Defense against C&W ASR attack
 
 Try to run the command `python model/Attack_WER.py --attack CW_ASR_Attack --defense Resample` to check the WER result of 2 audio examples with defenses.
+
+### The Demo Result of ODE-based Defense against C&W ASR Attack
+
+Try to run the command `python model/CW_Defense_WER.py` to check the WER result of 2 audio examples with defenses.
 
 #### Please refer to the results in the [Result_CW_Defense](https://github.com/Winterzhangwinter/ODE-Based-Defense-Structure-for-ASR-System/blob/main/Result_CW_Defense.txt) to determine if you are running the commands above correctly.
 
