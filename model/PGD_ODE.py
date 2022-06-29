@@ -1,4 +1,4 @@
-# result after being attacked by three different ASR attacks
+# ODE Structure against PGD ASR Attack
 import os, sys
 import time
 import torch
@@ -16,18 +16,18 @@ import torch.nn as nn
 from torchdiffeq import odeint_adjoint as odeint
 
 # Parameters initilaization
-wer_max = 0
-at_wer_list=[]
-ao_wer_list=[]
-at_wer_num=0
-ao_wer_num=0
+wer_max     = 0
+at_wer_list = []
+ao_wer_list = []
+at_wer_num  = 0
+ao_wer_num  = 0
 
 # Set attack path 
 
 data_wav_dire = '/data/RandomAudios2'
 data_txt_dire = '/data/RandomTxts2'
-adv_wav_dire = '/data/Adv_Wav2'
-adv_txt_dire = '/data/Adv_Txt2'
+adv_wav_dire  = '/data/Adv_Wav2'
+adv_txt_dire  = '/data/Adv_Txt2'
 
 # Sort audios files
 wav_data_dire = os.listdir(data_wav_dire)
@@ -45,13 +45,12 @@ txt_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
 wav_adv_dire = os.listdir(adv_wav_dire)
 wav_adv_dire.sort(key=lambda x:int((x.split('.')[0]).split('_')[1]))
 
-
 # ODE parameter initialization
-T = 1 # the endtime of processing. 
+T          = 1         # the endtime of processing. 
 non_linear = torch.sin
-coeffi = -1    #-1 by default
-layernum = 0     #0  by default
-tol = 1e-3      #1e-3 by default
+coeffi     = -1        # -1 by default
+layernum   = 0         # 0  by default
+tol        = 1e-3      # 1e-3 by default
 
 # Define ODE Bolck Part
 class Fully_Connect(nn.Module):
@@ -80,7 +79,6 @@ class ODE_Function(nn.Module):
         out = self.non2(out)
         out = coeffi*self.fc3(t, out)
         out = self.non3(out)
-
         return out
 
 class ODEBlock(nn.Module):
